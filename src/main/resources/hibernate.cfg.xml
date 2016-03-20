@@ -12,6 +12,6 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">false</property>
 		<mapping class="a.j.hibernatestart.model.Student" />
-		<mapping class="a.j.hibernatestart.model.University"/>
+		<mapping class="a.j.hibernatestart.model.Subject"/>
 	</session-factory>
 </hibernate-configuration>
