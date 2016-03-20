@@ -28,18 +28,44 @@ public class OneToOneTest {
 //		}
 //		session.getTransaction().commit();
 //		session.close();
-		
-		 Student student = new Student("Sam","Disilva","Maths");
+	//--------------
+//		 Student student = new Student("Sam","Disilva","Maths");
+//	        Address address = new Address("10 Silver street","NYC","USA");
+	         
+	         
+//	        Session session = HibernateUtil.getSessionFactory().openSession();
+//	        session.beginTransaction();
+//	 
+////	        session.persist(address);
+////	        student.setAddress(address);
+////	        session.persist(student);
+//	 
+//	        student.setAddress(address);
+//	        address.setStudent(student);
+//	        session.save(student);
+//	         
+//	     
+//	        List<Student> students = (List<Student>)session.createQuery("from Student ").list();
+//	        for(Student s: students){
+//	            System.out.println("Details : "+s);
+//	        }
+//	         
+//	        session.getTransaction().commit();
+//	        session.close();  
+	        
+	        //-------------------
+	        
+	        Student student = new Student("Sam","Disilva","Maths");
 	        Address address = new Address("10 Silver street","NYC","USA");
 	         
 	         
 	        Session session = HibernateUtil.getSessionFactory().openSession();
 	        session.beginTransaction();
 	 
-	        session.persist(address);
 	        student.setAddress(address);
-	        session.persist(student);
-	 
+	        address.setStudent(student);
+	        session.save(student);
+	         
 	        List<Student> students = (List<Student>)session.createQuery("from Student ").list();
 	        for(Student s: students){
 	            System.out.println("Details : "+s);

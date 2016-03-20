@@ -3,20 +3,42 @@ package a.j.hibernatestart.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "ADDRESS")
 public class Address {
  
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "ADDRESS_ID")
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    @Column(name = "ADDRESS_ID")
+//    private long id;
+	@Id
+    @Column(name="ADDRESS_ID")
+    @GeneratedValue(generator="gen")
+    @GenericGenerator(name="gen", strategy="foreign",parameters=@Parameter(name="property", value="student"))
     private long id;
+	
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Student student;
+    
  
-    @Column(name = "STREET")
+    public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	@Column(name = "STREET")
     private String street;
  
     @Column(name = "CITY")
