@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,16 +21,17 @@ public class Student implements Serializable {
 	private static final long serialVersionUID = 6566411862489064491L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name = "STUDENT_ID")
 	private int id;
 
-	@Column(name = "FIRST_NAME", nullable = false)
+	@Column(name = "FIRST_NAME")
 	private String firstName;
 
-	@Column(name = "LAST_NAME", nullable = false)
+	@Column(name = "LAST_NAME")
 	private String lastName;
 
-	@Column(name = "SECTION", nullable = false)
+	@Column(name = "SECTION")
 	private String section;
 
 	public int getId() {
@@ -62,6 +65,28 @@ public class Student implements Serializable {
 	public void setSection(String section) {
 		this.section = section;
 	}
+	/*
+	 * 共享主键
+	@OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Address address;
+    */
+ 
+	//独立主键
+	@OneToOne
+    @JoinColumn(name="HOME_ADDRESS_ID")
+    private Address address;
+	
+	
+    public Student() {
+ 
+    }
+ 
+    public Student(String firstName, String lastName, String section) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.section = section;
+    }
 
 	@Override
 	public int hashCode() {
@@ -69,6 +94,14 @@ public class Student implements Serializable {
 		int result = 1;
 		result = prime * result + id;
 		return result;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override
@@ -90,5 +123,7 @@ public class Student implements Serializable {
 		return "Student [id=" + id + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", section=" + section + "]";
 	}
+
+	
 
 }
